@@ -1,0 +1,16 @@
+requests
+scikit-learn
+pandas
+pyjwt
+numpy
+python-multipart
+fastapi
+pydantic
+typing
+pyyaml
+uuid
+nltk
+uvicorn
+xlsxWriter
+bertopic
+sentence-transformers
