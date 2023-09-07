@@ -10,7 +10,6 @@ import io
 from bertopic.dimensionality import BaseDimensionalityReduction
 import nltk
 from nltk.corpus import stopwords
-from sentence_transformers import SentenceTransformer
 from umap import UMAP
 from hdbscan import HDBSCAN
 from sklearn.feature_extraction.text import CountVectorizer
@@ -19,7 +18,6 @@ from bertopic import BERTopic
 from nltk.util import skipgrams
 import functools
 from nltk import word_tokenize
-from sklearn.cluster import KMeans
 from transformers.pipelines import pipeline
 from config import settings
 import openai

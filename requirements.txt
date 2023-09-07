@@ -13,7 +13,6 @@ nltk
 uvicorn
 xlsxWriter
 bertopic
-sentence-transformers
 openai
 pydantic-settings
 tiktoken
