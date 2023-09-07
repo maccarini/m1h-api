@@ -24,6 +24,7 @@ from transformers.pipelines import pipeline
 from config import settings
 import openai
 from bertopic.backend import OpenAIBackend
+import tiktoken
 
 OPENAI_KEY = settings.openai_api_key
 openai.api_key = OPENAI_KEY
@@ -52,7 +53,7 @@ relevant = {"no", "ni", "sin", "nada", "sí", "estad", "fuera"}
 UMAP_N_COMPONENTS = 5
 DBSCAN_MIN_CLUSTER_SIZE =  30
 N_NEIGHBORS = 5 
-embedding_model = OpenAIBackend("text-embedding-ada-002")
+embedding_model = OpenAIBackend(embedding_model="text-embedding-ada-002", batch_size=512)
 umap_model = UMAP(n_neighbors=N_NEIGHBORS, n_components=UMAP_N_COMPONENTS, min_dist=0.0, metric='cosine')
 hdbscan_model = HDBSCAN(min_cluster_size=DBSCAN_MIN_CLUSTER_SIZE, min_samples=15, metric='euclidean', cluster_selection_method='eom', prediction_data=True)
 vectorizer_model = CountVectorizer(ngram_range = (2,3), stop_words=STOPWORDS)
@@ -98,12 +99,14 @@ async def clusterize(
         )
         topics, probs = topic_model.fit_transform(docs)
         freq = topic_model.get_topic_info()
-        print(freq.to_json())
-        return freq.to_json()
+        print(f'Se ha generado un output de {len(freq)} tópicos.')
+        return {
+            "tags": topic_model.topics_,
+            "topic_info":freq.to_json()
+        }
     except Exception as e:
         print(e)
         return "Se ha producido un error en la ejecución."
-
 
 
 def secure(token):

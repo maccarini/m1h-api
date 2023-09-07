@@ -16,3 +16,4 @@ bertopic
 sentence-transformers
 openai
 pydantic-settings
+tiktoken
