@@ -49,7 +49,7 @@ STOPWORDS = list(stopwords.words("spanish"))
 relevant = {"no", "ni", "sin", "nada", "sí", "estad", "fuera"}
 [STOPWORDS.remove(word) for word in relevant]
 UMAP_N_COMPONENTS = 5
-DBSCAN_MIN_CLUSTER_SIZE =  30
+DBSCAN_MIN_CLUSTER_SIZE = 20
 N_NEIGHBORS = 5 
 embedding_model = OpenAIBackend(embedding_model="text-embedding-ada-002", batch_size=512)
 umap_model = UMAP(n_neighbors=N_NEIGHBORS, n_components=UMAP_N_COMPONENTS, min_dist=0.0, metric='cosine')
